@@ -15,6 +15,10 @@ namespace Practica1.AccesoDatos.Data
         public DbSet<Bodega> Bodegas { get; set; }
         public DbSet<Categoria>Categorias { get; set; }
         public DbSet<Marca>Marcas { get; set; }
+        public DbSet<Producto>Productos { get; set; }
+        public DbSet<Departamento> Departamentos { get; set; }
+        public DbSet<Profesor> Profesores { get; set; }
+        public DbSet<Curso>Cursos { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

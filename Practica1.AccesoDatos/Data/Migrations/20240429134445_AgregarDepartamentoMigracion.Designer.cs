@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Practica1.AccesoDatos.Data;
 
 #nullable disable
 
-namespace Practica1.Data.Migrations
+namespace Practica1.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240429134445_AgregarDepartamentoMigracion")]
+    partial class AgregarDepartamentoMigracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,44 +279,6 @@ namespace Practica1.Data.Migrations
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("Practica1.Modelos.Curso", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Nivel")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<int?>("PadreId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfesorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PadreId");
-
-                    b.HasIndex("ProfesorId");
-
-                    b.ToTable("Cursos");
-                });
-
             modelBuilder.Entity("Practica1.Modelos.Departamento", b =>
                 {
                     b.Property<int>("Id")
@@ -418,44 +383,6 @@ namespace Practica1.Data.Migrations
                     b.ToTable("Productos");
                 });
 
-            modelBuilder.Entity("Practica1.Modelos.Profesor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DepartamentoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<int?>("PadreId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartamentoId");
-
-                    b.HasIndex("PadreId");
-
-                    b.ToTable("Profesores");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -507,24 +434,6 @@ namespace Practica1.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Practica1.Modelos.Curso", b =>
-                {
-                    b.HasOne("Practica1.Modelos.Producto", "Padre")
-                        .WithMany()
-                        .HasForeignKey("PadreId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("Practica1.Modelos.Profesor", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("ProfesorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Padre");
-
-                    b.Navigation("Profesor");
-                });
-
             modelBuilder.Entity("Practica1.Modelos.Producto", b =>
                 {
                     b.HasOne("Practica1.Modelos.Categoria", "Categoria")
@@ -547,24 +456,6 @@ namespace Practica1.Data.Migrations
                     b.Navigation("Categoria");
 
                     b.Navigation("Marca");
-
-                    b.Navigation("Padre");
-                });
-
-            modelBuilder.Entity("Practica1.Modelos.Profesor", b =>
-                {
-                    b.HasOne("Practica1.Modelos.Departamento", "Departamento")
-                        .WithMany()
-                        .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Practica1.Modelos.Producto", "Padre")
-                        .WithMany()
-                        .HasForeignKey("PadreId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Departamento");
 
                     b.Navigation("Padre");
                 });

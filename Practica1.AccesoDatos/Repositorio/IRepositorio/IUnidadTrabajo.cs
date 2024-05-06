@@ -11,6 +11,10 @@ namespace Practica1.AccesoDatos.Repositorio.IRepositorio
         IBodegaRepositorio Bodega {  get; }
         ICategoriaRepositorio Categoria { get; }
         IMarcaRepositorio Marca { get; }
+        IProductoRepositorio Producto { get; }
+        IDepartamentoRepositorio Departamento { get; }
+        IProfesorRepositorio Profesor { get; }
+        ICursoRepositorio Curso { get; }
         Task Guardar();
     }
 }

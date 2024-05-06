@@ -1,0 +1,98 @@
+﻿@model Practica1.Modelos.ViewModels.ProfesorVM
+@using Practica1.Utilidades
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear nuevo Profesor";
+}
+
+<form method="post" enctype="multipart/form-data"> 
+    @if (Model.Profesor.Id != 0)
+    {
+        titulo = "Editar Producto";
+        <input asp-for="Profesor.Id" hidden />
+    }
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <h2 class="text-info">@titulo</h2>
+        </div>
+        <!--Crear el sistema de columnas-->
+        <div class="row">
+            <!--Primer columna para los campos de datos-->
+            <div class="col-8">
+                <div class="container">
+                    <!--Campo Numero de Serie-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Nombre</label>
+                            <input asp-for="Profesor.Nombre" class="form-control" />
+                            <span asp-validation-for="Profesor.Nombre" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--Campo Descripcion-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Descripcion</label>
+                            <input asp-for="Profesor.Descripcion" class="form-control" />
+                            <span asp-validation-for="Profesor.Descripcion" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--Campo Costo-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Telefono</label>
+                            <input asp-for="Profesor.Telefono" class="form-control" />
+                            <span asp-validation-for="Profesor.Telefono" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <!--Lista categoria-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Departamento</label>
+                            <select asp-for="Profesor.DepartamentoId" asp-items="@Model.DepartamentoLista" class="form-select">
+                                <option disabled selected>--Elige una Departamento--</option>
+                            </select>
+                            <span asp-validation-for="Profesor.DepartamentoId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--Lista padre-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Profesor</label>
+                            <select asp-for="Profesor.PadreId" asp-items="@Model.PadreLista" class="form-select">
+                                <option disabled selected>--Elige un profesor--</option>
+                            </select>
+                        </div>
+                    </div>
+                  
+                    <!--Botones-->
+                    <br />
+                    <div class="d-grid gap-2 d-md-block">
+                        @if (Model.Profesor.Id != 0)
+                        {
+                            <partial name="_BotonesActualizarYRegresar" model="Model.Profesor.Id"></partial>
+                        }
+                        else
+                        {
+                            <button type="submit" onclick="return validarImagen()" class="btn-primary">
+                                <i class="bi bi-clipboard-plus-fill"></i>Crear
+                            </button>
+                            <a asp-action="Index" class="btn btn-success"><i class="bi bi-arrow-return-left"></i>
+                                Regresar</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--Columna para imagen-->
+        </div>
+
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+    
+}
+

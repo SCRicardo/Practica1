@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -19,6 +19,10 @@
     <ProjectReference Include="..\Practica1.AccesoDatos\Practica1.AccesoDatos.csproj" />
     <ProjectReference Include="..\Practica1.Modelos\Practica1.Modelos.csproj" />
     <ProjectReference Include="..\Practica1.Utilidades\Practica1.Utilidades.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\imagenes\productos\" />
   </ItemGroup>
 
 </Project>

@@ -55,7 +55,7 @@ function Delete(url) {
                 type: "Post",
                 url: url,
                 success: function (data) {
-                    if (dara.success) {
+                    if (data.success) {
                         toastr.success(data.message);
                         datatable.ajax.reload();
                     } else {
